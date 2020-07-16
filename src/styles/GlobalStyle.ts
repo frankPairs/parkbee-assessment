@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
   }
   a {
     background-color: transparent;
+    text-decoration: none;
   }
   abbr[title] {
     border-bottom: none;

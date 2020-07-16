@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
 import { normalize } from 'normalizr';
 
-import { GarageAPI } from './types';
 import { garagesList } from './schema';
 import { SetGaragesListDataAction, GaragesActionTypes, Garage } from './types';
 
@@ -10,10 +9,10 @@ const setGaragesListData = (garages: { [garageId: string]: Garage }): SetGarages
   payload: garages,
 });
 
-const getGaragesSuccess = (data: GarageAPI[]) => async (dispatch: Dispatch) => {
+const getGaragesRequestSuccess = (data: Garage[]) => async (dispatch: Dispatch) => {
   const { entities } = normalize<Garage, { garages: { [garageID: string]: Garage } }>(data, garagesList);
 
   dispatch(setGaragesListData(entities.garages));
 };
 
-export { getGaragesSuccess };
+export { getGaragesRequestSuccess };

@@ -23,11 +23,11 @@ enum DoorType {
 }
 
 interface Garage {
-  id: number;
+  id: string;
   name: string;
   fullName: string;
   countryCode: string;
-  zoneNumber: string;
+  zoneNumber: number;
   doors: {
     doorId: string;
     doorType: DoorType;
@@ -38,14 +38,15 @@ interface Garage {
 
 /* API Models */
 interface GarageAPI {
-  id: number;
+  id: string;
+  name: string;
   garageName: string;
   countryCode: string;
-  zoneNumber: string;
+  zoneNumber: number;
 }
 
 interface FullGarageAPI {
-  garageId: number;
+  garageId: string;
   garageName: string;
   name: string;
   lattitude: number;
@@ -55,7 +56,7 @@ interface FullGarageAPI {
   city: string;
   countryCode: string;
   hasBarrier: boolean;
-  zoneNumber: string;
+  zoneNumber: number;
   isSuspended: boolean;
   doors: {
     doorId: string;

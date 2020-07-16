@@ -9,8 +9,9 @@ const media = {
 
 const colors = {
   black: '#000',
-  primary: '#4D00FF',
+  primary: '#ffd600',
   gray1: '#999',
+  white: '#fff',
 };
 
 const theme: DefaultTheme = { media, colors };

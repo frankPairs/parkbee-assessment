@@ -6,3 +6,5 @@ export * from './prices/actions';
 export * from './prices/selectors';
 export * from './list/actions';
 export * from './list/selectors';
+export * from './list/services';
+export * from './list/types';
