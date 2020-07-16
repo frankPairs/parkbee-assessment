@@ -11,6 +11,7 @@ const Wrapper = styled.article`
   flex: 0 0 calc(25% - 1.25rem);
 
   .header {
+    align-items: center;
     display: flex;
     padding: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);

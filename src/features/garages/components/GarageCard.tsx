@@ -13,7 +13,8 @@ function GarageCard({ garage }: Props) {
   return (
     <Wrapper>
       <header className="header">
-        <span className="country-flag">{garage.countryCode}</span>
+        <img className="country-flag" src={`https://www.countryflags.io/${garage.countryCode}/flat/16.png`} />
+
         <h3 className="title">{garage.name}</h3>
       </header>
       <footer className="footer">
