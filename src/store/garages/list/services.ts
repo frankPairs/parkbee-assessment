@@ -1,6 +1,6 @@
 import MockAdapter from 'axios-mock-adapter';
 
-import { garagesMock, delayAxiosResponse } from '../../../__mocks__';
+import { garagesMock, fullGaragesMock, delayAxiosResponse } from '../../../__mocks__';
 import { api } from '../../api';
 import { GarageAPI, FullGarageAPI, Garage } from './types';
 
@@ -13,6 +13,8 @@ function getGaragesRequest(): Promise<Garage[]> {
 }
 
 function getOneGarageRequest(garageId: string): Promise<Garage> {
+  apiMock.onGet(`/garages/${garageId}`).reply(() => delayAxiosResponse<FullGarageAPI>(fullGaragesMock[garageId]));
+
   return api.get<FullGarageAPI>(`/garages/${garageId}`).then((res) => parseFullGarageAPIToGarage(res.data));
 }
 

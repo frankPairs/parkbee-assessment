@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
+
 import { useGetGarages } from './useGaragesRequests';
 import { useSelectGarages } from './useGaragesSelectors';
-import { useEffect } from 'react';
 
 function useGarageList() {
   const [response, request] = useGetGarages();

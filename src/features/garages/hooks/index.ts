@@ -1,1 +1,2 @@
-export * from './useGaragesRequests';
+export * from './useGarageList';
+export * from './useGarageInfo';

@@ -6,6 +6,7 @@ interface GaragesListState {
 /* Actions */
 enum GaragesActionTypes {
   SET_GARAGES_LIST_DATA = 'setGaragesListData',
+  ADD_GARAGE = 'addGarage',
 }
 
 interface SetGaragesListDataAction {
@@ -13,14 +14,17 @@ interface SetGaragesListDataAction {
   payload: { [garageId: string]: Garage };
 }
 
-type GaragesActions = SetGaragesListDataAction;
+interface AddGarageAction {
+  type: GaragesActionTypes.ADD_GARAGE;
+  payload: {
+    garageId: string;
+    garage: Garage;
+  };
+}
+
+type GaragesActions = SetGaragesListDataAction | AddGarageAction;
 
 /* Models */
-enum DoorType {
-  HUMAN = 'human',
-  ENTRY = 'entry',
-  EXIT = 'exit',
-}
 
 interface Garage {
   id: string;
@@ -30,7 +34,7 @@ interface Garage {
   zoneNumber: number;
   doors: {
     doorId: string;
-    doorType: DoorType;
+    doorType: string;
     description: string;
   }[];
   active: boolean;
@@ -49,7 +53,7 @@ interface FullGarageAPI {
   garageId: string;
   garageName: string;
   name: string;
-  lattitude: number;
+  latitude: number;
   longitude: number;
   streetAddress: string;
   postalCode: string;
@@ -58,9 +62,10 @@ interface FullGarageAPI {
   hasBarrier: boolean;
   zoneNumber: number;
   isSuspended: boolean;
+  garageSuspensions: [];
   doors: {
     doorId: string;
-    doorType: DoorType;
+    doorType: string;
     description: string;
   }[];
   garageInformation: {
@@ -83,9 +88,6 @@ interface FullGarageAPI {
       size: string;
       url: string;
     }[];
-    urls_name: string;
-    urls_size: string;
-    urls_url: string;
   }[];
 }
 
@@ -94,6 +96,7 @@ export {
   GaragesListState,
   GaragesActionTypes,
   SetGaragesListDataAction,
+  AddGarageAction,
   GaragesActions,
   GarageAPI,
   FullGarageAPI,

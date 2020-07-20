@@ -9,6 +9,6 @@ const selectGaragesList = (state: AppState) => {
 };
 
 const selectGarageById = (state: AppState, garageId: string) =>
-  pathOr<Garage | null>(null, ['states', 'garages', 'list', 'data', garageId], state);
+  pathOr<Garage | null>(null, ['garages', 'list', 'data', garageId], state);
 
 export { selectGaragesList, selectGarageById };

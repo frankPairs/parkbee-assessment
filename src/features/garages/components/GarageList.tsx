@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGarageList } from '../hooks/useGarageList';
+import { useGarageList } from '../hooks';
 
 import { Loading } from '../../../components/icons';
 import { GarageCard } from './GarageCard';

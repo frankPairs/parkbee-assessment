@@ -15,6 +15,15 @@ function garagesListReducer(
         data: action.payload,
       };
     }
+    case GaragesActionTypes.ADD_GARAGE: {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          [action.payload.garageId]: action.payload.garage,
+        },
+      };
+    }
     default: {
       return state;
     }

@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
 import { render, cleanup } from '@testing-library/react';
 
-import { MockThemeProvider } from '../../../../tests/MockThemeProvider';
+import { MockThemeProvider } from '../../../tests/MockThemeProvider';
 import { TitleView } from './TitleView';
 
 function getWrapper(overrideProps?: Partial<ComponentProps<typeof TitleView>>) {
