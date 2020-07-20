@@ -4,7 +4,9 @@ import { pathOr } from 'ramda';
 
 import { Loading } from '../../../components/icons/Loading';
 import { TitleView } from '../../../components/layout';
+import { GarageFullCard } from '../components';
 import { useGarageInfo } from '../hooks';
+import { Wrapper } from './GarageView.styled';
 
 interface Props extends RouteComponentProps {}
 
@@ -17,17 +19,21 @@ function GarageView({ match }: Props) {
 
   if (!garage) {
     return (
-      <div>
+      <Wrapper>
         <TitleView title="Garage not found" />
-      </div>
+      </Wrapper>
     );
   }
 
   return (
-    <div>
+    <Wrapper>
       <TitleView title={garage.name} />
-      <p>Garage view</p>
-    </div>
+      <div className="content">
+        <div className="full-card">
+          <GarageFullCard garage={garage} />
+        </div>
+      </div>
+    </Wrapper>
   );
 }
 

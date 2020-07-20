@@ -27,6 +27,13 @@ function parseGarageAPIToGarage(garageResponse: GarageAPI): Garage {
     doors: [],
     active: false,
     countryCode: garageResponse.countryCode,
+    location: null,
+    photos: [],
+    isPayPerMinute: false,
+    isReservable: false,
+    isPrepaid: false,
+    isSuspended: false,
+    hasBarrier: false,
   };
 }
 
@@ -39,6 +46,20 @@ function parseFullGarageAPIToGarage(fullGarageResponse: FullGarageAPI): Garage {
     doors: fullGarageResponse.doors,
     active: fullGarageResponse.active,
     countryCode: fullGarageResponse.countryCode,
+    location: {
+      street: fullGarageResponse.streetAddress,
+      postalCode: fullGarageResponse.postalCode,
+      city: fullGarageResponse.city,
+    },
+    photos: fullGarageResponse.photos.map((photo) => ({
+      name: photo.description,
+      urls: photo.urls.map((url) => url.url),
+    })),
+    isPayPerMinute: fullGarageResponse.isPayPerMinute,
+    isReservable: fullGarageResponse.isReservable,
+    isPrepaid: fullGarageResponse.isPrepaid,
+    isSuspended: fullGarageResponse.isSuspended,
+    hasBarrier: fullGarageResponse.hasBarrier,
   };
 }
 export { getGaragesRequest, getOneGarageRequest };

@@ -37,7 +37,25 @@ interface Garage {
     doorType: string;
     description: string;
   }[];
+  location: GarageLocation | null;
   active: boolean;
+  photos: GaragePhoto[];
+  isPayPerMinute: boolean;
+  isReservable: boolean;
+  isPrepaid: boolean;
+  isSuspended: boolean;
+  hasBarrier: boolean;
+}
+
+interface GarageLocation {
+  street: string;
+  postalCode: string;
+  city: string;
+}
+
+interface GaragePhoto {
+  name: string;
+  urls: string[];
 }
 
 /* API Models */

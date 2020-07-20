@@ -5,8 +5,6 @@ interface WrapperProps {
 }
 
 const Wrapper = styled.button<WrapperProps>`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.black};
   align-items: center;
   display: flex;
   border: none;
@@ -18,6 +16,22 @@ const Wrapper = styled.button<WrapperProps>`
   line-height: 2.5rem;
   padding: 0 1rem;
   text-transform: uppercase;
+  font-weight: bold;
 `;
 
-export { Wrapper };
+const DefaultButton = styled(Wrapper)`
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.black};
+`;
+
+const PrimaryButton = styled(Wrapper)`
+  background-color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+const SecondaryButton = styled(Wrapper)`
+  background-color: ${({ theme }) => theme.colors.red};
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+export { DefaultButton, PrimaryButton, SecondaryButton };
