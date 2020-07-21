@@ -20,7 +20,7 @@
 
 5. What future or current technology do you look forward to the most or want to use and why?
    I like a lot GraphQL. I think nowadays, with microservice architechtures, get data from the clinets is
-   becoming more and more complex. I find GraphQL very interesting technology to solve a lot of problems like
+   becoming more and more complex. I find GraphQL very interesting technology to solve a lot of problems coming from that like
    underfetching and overfething + it gives a lot of independence to the clients (web, mobile app, etc).
 
 6. How would you find a production bug/performance issue? Have you done this before?
