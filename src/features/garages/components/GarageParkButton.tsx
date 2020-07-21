@@ -4,6 +4,7 @@ import { RaisedButton } from '../../../components/buttons';
 import { useSelectGaragePrice, useSelectDoorTransaction } from '../hooks';
 import { GarageStandardPrice, GarageDoor } from '../../../store/garages';
 import { useStartParkRequest, useStopParkRequest } from '../hooks/useGaragesRequests';
+import { useSelectGarageAvailability } from '../hooks/useGaragesSelectors';
 
 interface Props {
   garageId: string;
@@ -14,6 +15,7 @@ function GarageParkButton({ garageId, doors }: Props) {
   const currentDoor = doors[0];
   const transaction = useSelectDoorTransaction(currentDoor.doorId);
   const price = useSelectGaragePrice(garageId) as GarageStandardPrice;
+  const availiability = useSelectGarageAvailability(garageId);
   const [, startParkRequest] = useStartParkRequest();
   const [, stopParkRequest] = useStopParkRequest();
 
@@ -40,6 +42,10 @@ function GarageParkButton({ garageId, doors }: Props) {
         Stop
       </RaisedButton>
     );
+  }
+
+  if (availiability !== null && availiability.capacity === availiability.availableSpaces) {
+    return null;
   }
 
   return (
