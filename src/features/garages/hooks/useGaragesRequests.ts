@@ -10,6 +10,11 @@ import {
   getGarageAvailabilitySuccess,
   getGaragePriceRequest,
   getGaragePriceSuccess,
+  startParkRequest,
+  StartParkAPIRequest,
+  postStartParkSuccess,
+  stopParkRequest,
+  postStopParkSuccess,
 } from '../../../store/garages';
 import { RequestState } from '../../../types';
 import { useSelectGaragesListIsCached } from './useGaragesSelectors';
@@ -20,8 +25,11 @@ interface Response {
 }
 
 type UseGetGaragesReturn = [Response, () => Promise<void>];
+type UseGetOneFullDataGarageReturn = [Response, () => Promise<void>];
+type UseStartParkRequest = [Response, (input: StartParkAPIRequest) => Promise<void>];
+type UseStopParkRequest = [Response, (doorId: string, transactionId: string) => Promise<void>];
 
-function useGetGarages(): UseGetGaragesReturn {
+function useGetGaragesRequest(): UseGetGaragesReturn {
   const dispatch = useDispatch();
   const [response, setResponse] = useState<Response>({ state: RequestState.IDLE, error: null });
   const isCached = useSelectGaragesListIsCached();
@@ -47,7 +55,7 @@ function useGetGarages(): UseGetGaragesReturn {
   return [response, request];
 }
 
-function useGetOneFullDataGarage(garageId: string): UseGetGaragesReturn {
+function useGetOneFullDataGarageRequest(garageId: string): UseGetOneFullDataGarageReturn {
   const dispatch = useDispatch();
   const [response, setResponse] = useState<Response>({ state: RequestState.IDLE, error: null });
 
@@ -73,4 +81,43 @@ function useGetOneFullDataGarage(garageId: string): UseGetGaragesReturn {
   return [response, request];
 }
 
-export { useGetGarages, useGetOneFullDataGarage };
+function useStartParkRequest(): UseStartParkRequest {
+  const dispatch = useDispatch();
+  const [response, setResponse] = useState<Response>({ state: RequestState.IDLE, error: null });
+
+  async function request(input: StartParkAPIRequest) {
+    try {
+      setResponse({ state: RequestState.LOADING, error: null });
+
+      const data = await startParkRequest(input);
+
+      dispatch(postStartParkSuccess(input.DoorId, data));
+      setResponse({ state: RequestState.SUCCESS, error: null });
+    } catch (err) {
+      setResponse({ state: RequestState.ERROR, error: err.message });
+    }
+  }
+
+  return [response, request];
+}
+
+function useStopParkRequest(): UseStopParkRequest {
+  const dispatch = useDispatch();
+  const [response, setResponse] = useState<Response>({ state: RequestState.IDLE, error: null });
+
+  async function request(doorId: string, transactionId: string) {
+    try {
+      setResponse({ state: RequestState.LOADING, error: null });
+
+      const data = await stopParkRequest(transactionId);
+
+      dispatch(postStopParkSuccess(doorId, data));
+      setResponse({ state: RequestState.SUCCESS, error: null });
+    } catch (err) {
+      setResponse({ state: RequestState.ERROR, error: err.message });
+    }
+  }
+
+  return [response, request];
+}
+export { useGetGaragesRequest, useGetOneFullDataGarageRequest, useStartParkRequest, useStopParkRequest };

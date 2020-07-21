@@ -8,6 +8,7 @@ interface GaragesListState {
 enum GaragesActionTypes {
   SET_GARAGES_LIST_DATA = 'setGaragesListData',
   ADD_GARAGE = 'addGarage',
+  ADD_GARAGE_TRANSACTION = 'addGarageTransaction',
 }
 
 interface SetGaragesListDataAction {
@@ -33,11 +34,7 @@ interface Garage {
   fullName: string;
   countryCode: string;
   zoneNumber: number;
-  doors: {
-    doorId: string;
-    doorType: string;
-    description: string;
-  }[];
+  doors: GarageDoor[];
   location: GarageLocation | null;
   active: boolean;
   photos: GaragePhoto[];
@@ -57,6 +54,12 @@ interface GarageLocation {
 interface GaragePhoto {
   name: string;
   urls: string[];
+}
+
+interface GarageDoor {
+  doorId: string;
+  doorType: string;
+  description: string;
 }
 
 /* API Models */
@@ -112,6 +115,7 @@ interface FullGarageAPI {
 
 export {
   Garage,
+  GarageDoor,
   GaragesListState,
   GaragesActionTypes,
   SetGaragesListDataAction,

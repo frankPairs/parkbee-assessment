@@ -40,7 +40,7 @@ function GarageFullCard({ garage }: Props) {
       <footer className="footer">
         <div className="content-footer" />
 
-        <GarageParkButton garageId={garage.id} />
+        <GarageParkButton garageId={garage.id} doors={garage.doors} />
       </footer>
     </Wrapper>
   );

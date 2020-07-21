@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-import { useGetGarages } from './useGaragesRequests';
+import { useGetGaragesRequest } from './useGaragesRequests';
 import { useSelectGarages } from './useGaragesSelectors';
 
 function useGarageList() {
-  const [response, request] = useGetGarages();
+  const [response, request] = useGetGaragesRequest();
   const garages = useSelectGarages();
 
   useEffect(function getGarages() {

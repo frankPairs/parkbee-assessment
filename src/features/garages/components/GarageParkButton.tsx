@@ -1,22 +1,49 @@
 import React from 'react';
 
 import { RaisedButton } from '../../../components/buttons';
-import { useSelectGaragePrice } from '../hooks';
-import { GarageStandardPrice } from '../../../store/garages';
+import { useSelectGaragePrice, useSelectDoorTransaction } from '../hooks';
+import { GarageStandardPrice, GarageDoor } from '../../../store/garages';
+import { useStartParkRequest, useStopParkRequest } from '../hooks/useGaragesRequests';
 
 interface Props {
   garageId: string;
+  doors: GarageDoor[];
 }
 
-function GarageParkButton({ garageId }: Props) {
+function GarageParkButton({ garageId, doors }: Props) {
+  const currentDoor = doors[0];
+  const transaction = useSelectDoorTransaction(currentDoor.doorId);
   const price = useSelectGaragePrice(garageId) as GarageStandardPrice;
+  const [, startParkRequest] = useStartParkRequest();
+  const [, stopParkRequest] = useStopParkRequest();
 
   if (!price) {
     return null;
   }
 
+  function handleStartPark() {
+    startParkRequest({
+      DoorId: currentDoor.doorId,
+      GarageId: garageId,
+      ExternalClientId: '12313',
+      RegistrationNumber: '12345',
+    });
+  }
+
+  function handleStopPark() {
+    stopParkRequest(currentDoor.doorId, transaction as string);
+  }
+
+  if (transaction) {
+    return (
+      <RaisedButton onClick={handleStopPark} type="button" size="small" variant="secondary">
+        Stop
+      </RaisedButton>
+    );
+  }
+
   return (
-    <RaisedButton type="button" size="small" variant="primary">
+    <RaisedButton onClick={handleStartPark} type="button" size="small" variant="primary">
       {`Park: ${price.basePrice}€`}
     </RaisedButton>
   );

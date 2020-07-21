@@ -7,6 +7,7 @@ import {
   selectGarageAvailability,
   selectGaragesListIsCached,
   selectGaragePrice,
+  selectDoorTransaction,
 } from '../../../store/garages';
 
 const useSelectGarages = () => useSelector(selectGaragesList);
@@ -20,10 +21,14 @@ const useSelectGarageAvailability = (garageId: string) =>
 
 const useSelectGaragePrice = (garageId: string) => useSelector((state: AppState) => selectGaragePrice(state, garageId));
 
+const useSelectDoorTransaction = (doorId: string) =>
+  useSelector((state: AppState) => selectDoorTransaction(state, doorId));
+
 export {
   useSelectGarages,
   useSelectGarageById,
   useSelectGarageAvailability,
   useSelectGaragesListIsCached,
   useSelectGaragePrice,
+  useSelectDoorTransaction,
 };
