@@ -8,7 +8,9 @@ const selectGaragesList = (state: AppState) => {
   return !data ? [] : Object.values(data);
 };
 
+const selectGaragesListIsCached = (state: AppState) => state.garages.list.isCached;
+
 const selectGarageById = (state: AppState, garageId: string) =>
   pathOr<Garage | null>(null, ['garages', 'list', 'data', garageId], state);
 
-export { selectGaragesList, selectGarageById };
+export { selectGaragesList, selectGarageById, selectGaragesListIsCached };

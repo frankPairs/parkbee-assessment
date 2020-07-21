@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Garage } from '../../../store/garages';
 import { RaisedButton } from '../../../components/buttons';
 import { GarageFeature } from './GarageFeature';
+import { GarageAvailability } from './GarageAvailability';
 import { Wrapper } from './GarageFullCard.styled';
 
 interface Props {
@@ -21,6 +22,7 @@ function GarageFullCard({ garage }: Props) {
             {`${garage.location.street}, ${garage.location.postalCode}, ${garage.location.city}`}
           </h3>
         )}
+        <GarageAvailability garageId={garage.id} />
       </header>
       <div className="content">
         <div className="image-wrapper">{photo && <img alt={photo.name} src={photo.urls[1]} />}</div>

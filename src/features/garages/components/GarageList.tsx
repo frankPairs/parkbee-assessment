@@ -16,7 +16,6 @@ function GarageList() {
     return null;
   }
 
-  console.log(garages);
   return (
     <Wrapper>
       {garages.map((garage) => (

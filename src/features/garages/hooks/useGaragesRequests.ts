@@ -4,8 +4,10 @@ import { useDispatch } from 'react-redux';
 import {
   getGaragesRequest,
   getOneGarageRequest,
+  getGaragesAvailabilitiesRequest,
   getGaragesRequestSuccess,
   getOneGarageRequestSuccess,
+  getGarageAvailabilitySuccess,
 } from '../../../store/garages';
 
 interface Response {
@@ -35,7 +37,7 @@ function useGetGarages(): UseGetGaragesReturn {
   return [response, request];
 }
 
-function useGetOneGarage(garageId: string): UseGetGaragesReturn {
+function useGetOneFullDataGarage(garageId: string): UseGetGaragesReturn {
   const dispatch = useDispatch();
   const [response, setResponse] = useState<Response>({ loading: false, error: null });
 
@@ -43,9 +45,13 @@ function useGetOneGarage(garageId: string): UseGetGaragesReturn {
     try {
       setResponse({ loading: true, error: null });
 
-      const data = await getOneGarageRequest(garageId);
+      const [garageFullData, garageAvailability] = await Promise.all([
+        getOneGarageRequest(garageId),
+        getGaragesAvailabilitiesRequest(garageId),
+      ]);
 
-      dispatch(getOneGarageRequestSuccess(garageId, data));
+      dispatch(getOneGarageRequestSuccess(garageId, garageFullData));
+      dispatch(getGarageAvailabilitySuccess(garageId, garageAvailability));
       setResponse({ loading: false, error: null });
     } catch (err) {
       setResponse({ loading: false, error: err.message });
@@ -55,4 +61,4 @@ function useGetOneGarage(garageId: string): UseGetGaragesReturn {
   return [response, request];
 }
 
-export { useGetGarages, useGetOneGarage };
+export { useGetGarages, useGetOneFullDataGarage };

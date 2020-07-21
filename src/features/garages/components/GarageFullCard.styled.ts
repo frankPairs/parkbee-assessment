@@ -16,7 +16,7 @@ const Wrapper = styled.article`
   }
 
   .header {
-    align-items: center;
+    align-items: felx-start;
     display: flex;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }

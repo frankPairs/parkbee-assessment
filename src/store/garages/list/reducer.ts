@@ -2,6 +2,7 @@ import { GaragesActions, GaragesListState, GaragesActionTypes } from './types';
 
 const garagesListInitialState: GaragesListState = {
   data: null,
+  isCached: false,
 };
 
 function garagesListReducer(
@@ -13,6 +14,7 @@ function garagesListReducer(
       return {
         ...state,
         data: action.payload,
+        isCached: true,
       };
     }
     case GaragesActionTypes.ADD_GARAGE: {

@@ -16,7 +16,6 @@ function GarageView({ match }: Props) {
   if (loading) {
     return <Loading />;
   }
-
   if (!garage) {
     return (
       <Wrapper>

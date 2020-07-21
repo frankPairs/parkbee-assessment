@@ -1,10 +1,6 @@
-import MockAdapter from 'axios-mock-adapter';
-
 import { garagesMock, fullGaragesMock, delayAxiosResponse } from '../../../__mocks__';
-import { api } from '../../api';
+import { api, apiMock } from '../../api';
 import { GarageAPI, FullGarageAPI, Garage } from './types';
-
-const apiMock = new MockAdapter(api);
 
 function getGaragesRequest(): Promise<Garage[]> {
   apiMock.onGet('/garages').reply(() => delayAxiosResponse<GarageAPI[]>(garagesMock));

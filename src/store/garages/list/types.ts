@@ -1,6 +1,7 @@
 /* State */
 interface GaragesListState {
   data: { [garageId: number]: Garage } | null;
+  isCached: boolean;
 }
 
 /* Actions */
