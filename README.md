@@ -78,3 +78,33 @@ Please put answers to the following questions in the [technical.md](technical.md
 7. How would you improve the application (bug fixes, security, performance, etc.)?
 
 We thank you for your time in completing this assessment. If you have questions or comments, please forward them to the person who assigned you the assessment.
+
+## Scripts
+
+Install dependencies:
+
+```
+npm i
+```
+
+Run development environment:
+
+```
+npm run dev
+```
+
+Run production environment:
+
+```
+npm start
+```
+
+Run test environment:
+
+```
+npm test
+```
+
+## Authors
+
+- [Frank Parejo](https://github.com/frankPairs)
