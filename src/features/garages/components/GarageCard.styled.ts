@@ -34,6 +34,14 @@ const Wrapper = styled.article`
     flex: 1;
     font-size: 1em;
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.media.desktopSmall}) {
+    flex: 0 0 calc(50% - 1.25rem);
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.media.tablet}) {
+    margin-right: 0;
+  }
 `;
 
 export { Wrapper };

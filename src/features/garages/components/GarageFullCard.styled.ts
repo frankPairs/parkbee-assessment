@@ -71,6 +71,17 @@ const Wrapper = styled.article`
   .country-flag {
     margin-right: 0.5rem;
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.media.desktopSmall}) {
+    flex: 1;
+    margin-right: 0;
+  }
+
+  @media only screen and (max-width: ${({ theme }) => theme.media.tablet}) {
+    .content {
+      flex-direction: column;
+    }
+  }
 `;
 
 export { Wrapper };
