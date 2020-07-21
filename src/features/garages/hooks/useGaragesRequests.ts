@@ -9,9 +9,11 @@ import {
   getOneGarageRequestSuccess,
   getGarageAvailabilitySuccess,
 } from '../../../store/garages';
+import { RequestState } from '../../../types';
+import { useSelectGaragesListIsCached } from './useGaragesSelectors';
 
 interface Response {
-  loading: boolean;
+  state: RequestState;
   error: string | null;
 }
 
@@ -19,18 +21,24 @@ type UseGetGaragesReturn = [Response, () => Promise<void>];
 
 function useGetGarages(): UseGetGaragesReturn {
   const dispatch = useDispatch();
-  const [response, setResponse] = useState<Response>({ loading: false, error: null });
+  const [response, setResponse] = useState<Response>({ state: RequestState.IDLE, error: null });
+  const isCached = useSelectGaragesListIsCached();
 
   async function request() {
+    if (isCached) {
+      setResponse({ state: RequestState.SUCCESS, error: null });
+      return;
+    }
+
     try {
-      setResponse({ loading: true, error: null });
+      setResponse({ state: RequestState.LOADING, error: null });
 
       const data = await getGaragesRequest();
 
       dispatch(getGaragesRequestSuccess(data));
-      setResponse({ loading: false, error: null });
+      setResponse({ state: RequestState.SUCCESS, error: null });
     } catch (err) {
-      setResponse({ loading: false, error: err.message });
+      setResponse({ state: RequestState.ERROR, error: err.message });
     }
   }
 
@@ -39,11 +47,11 @@ function useGetGarages(): UseGetGaragesReturn {
 
 function useGetOneFullDataGarage(garageId: string): UseGetGaragesReturn {
   const dispatch = useDispatch();
-  const [response, setResponse] = useState<Response>({ loading: false, error: null });
+  const [response, setResponse] = useState<Response>({ state: RequestState.IDLE, error: null });
 
   async function request() {
     try {
-      setResponse({ loading: true, error: null });
+      setResponse({ state: RequestState.LOADING, error: null });
 
       const [garageFullData, garageAvailability] = await Promise.all([
         getOneGarageRequest(garageId),
@@ -52,9 +60,9 @@ function useGetOneFullDataGarage(garageId: string): UseGetGaragesReturn {
 
       dispatch(getOneGarageRequestSuccess(garageId, garageFullData));
       dispatch(getGarageAvailabilitySuccess(garageId, garageAvailability));
-      setResponse({ loading: false, error: null });
+      setResponse({ state: RequestState.SUCCESS, error: null });
     } catch (err) {
-      setResponse({ loading: false, error: err.message });
+      setResponse({ state: RequestState.ERROR, error: err.message });
     }
   }
 

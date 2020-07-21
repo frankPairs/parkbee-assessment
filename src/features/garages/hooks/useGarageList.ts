@@ -1,17 +1,14 @@
 import { useEffect } from 'react';
 
 import { useGetGarages } from './useGaragesRequests';
-import { useSelectGarages, useSelectGaragesListIsCached } from './useGaragesSelectors';
+import { useSelectGarages } from './useGaragesSelectors';
 
 function useGarageList() {
   const [response, request] = useGetGarages();
   const garages = useSelectGarages();
-  const isCached = useSelectGaragesListIsCached();
 
   useEffect(function getGarages() {
-    if (!isCached) {
-      request();
-    }
+    request();
   }, []);
 
   return { ...response, garages };
