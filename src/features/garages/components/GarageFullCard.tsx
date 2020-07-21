@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { Garage } from '../../../store/garages';
-import { RaisedButton } from '../../../components/buttons';
 import { GarageFeature } from './GarageFeature';
 import { GarageAvailability } from './GarageAvailability';
+import { GarageParkButton } from './GarageParkButton';
 import { Wrapper } from './GarageFullCard.styled';
 
 interface Props {
@@ -41,11 +40,7 @@ function GarageFullCard({ garage }: Props) {
       <footer className="footer">
         <div className="content-footer" />
 
-        <Link to={`/garages/${garage.id}`}>
-          <RaisedButton type="button" size="small" variant="primary">
-            Park
-          </RaisedButton>
-        </Link>
+        <GarageParkButton garageId={garage.id} />
       </footer>
     </Wrapper>
   );

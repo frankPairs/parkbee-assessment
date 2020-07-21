@@ -8,6 +8,8 @@ import {
   getGaragesRequestSuccess,
   getOneGarageRequestSuccess,
   getGarageAvailabilitySuccess,
+  getGaragePriceRequest,
+  getGaragePriceSuccess,
 } from '../../../store/garages';
 import { RequestState } from '../../../types';
 import { useSelectGaragesListIsCached } from './useGaragesSelectors';
@@ -53,13 +55,15 @@ function useGetOneFullDataGarage(garageId: string): UseGetGaragesReturn {
     try {
       setResponse({ state: RequestState.LOADING, error: null });
 
-      const [garageFullData, garageAvailability] = await Promise.all([
+      const [garageFullData, garageAvailability, garagePrice] = await Promise.all([
         getOneGarageRequest(garageId),
         getGaragesAvailabilitiesRequest(garageId),
+        getGaragePriceRequest(garageId),
       ]);
 
       dispatch(getOneGarageRequestSuccess(garageId, garageFullData));
       dispatch(getGarageAvailabilitySuccess(garageId, garageAvailability));
+      dispatch(getGaragePriceSuccess(garageId, garagePrice));
       setResponse({ state: RequestState.SUCCESS, error: null });
     } catch (err) {
       setResponse({ state: RequestState.ERROR, error: err.message });

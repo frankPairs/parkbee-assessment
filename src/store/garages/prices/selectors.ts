@@ -6,6 +6,6 @@ import { GaragePrice } from './types';
 const selectGaragesPricesData = (state: AppState) => state.garages.prices.data;
 
 const selectGaragePrice = (state: AppState, garageId: string) =>
-  pathOr<GaragePrice | null>(null, ['states', 'garages', 'prices', 'data', garageId], state);
+  pathOr<GaragePrice | null>(null, ['garages', 'prices', 'data', garageId], state);
 
 export { selectGaragesPricesData, selectGaragePrice };

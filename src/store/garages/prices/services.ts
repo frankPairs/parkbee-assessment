@@ -1,4 +1,5 @@
-import { api } from '../../api';
+import { delayAxiosResponse, pricesMock } from '../../../__mocks__';
+import { api, apiMock } from '../../api';
 import {
   GaragePriceAPI,
   GaragePrice,
@@ -8,7 +9,9 @@ import {
   GarageTimeblockPriceAPI,
 } from './types';
 
-function getGaragePriceRequest(garageId: string): Promise<GaragePriceAPI> {
+function getGaragePriceRequest(garageId: string): Promise<GaragePrice> {
+  apiMock.onGet(`/garages/${garageId}/pricing`).reply(() => delayAxiosResponse<GaragePriceAPI>(pricesMock[garageId]));
+
   return api.get<GaragePriceAPI>(`/garages/${garageId}/pricing`).then((res) => {
     switch (res.data.type) {
       case PriceScheme.STANDARD:
